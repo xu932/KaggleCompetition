@@ -12,7 +12,7 @@ import torch.optim as optim
 from src.common import data_augmentation_rotate, data_augmentation_shift, test_model, train_and_validate_model
 
 BATCH_SIZE = 4096
-NUM_EPOCHS = 100
+NUM_EPOCHS = 150
 LEARNING_RATE = 0.0002
 L2_PENALTY = 0
 
@@ -34,8 +34,10 @@ class DigitRecognizerNN(nn.Module):
         self.pool2 = nn.MaxPool2d(kernel_size=2)
 
         self.fc1 = nn.Linear(256 * 5 * 5, 256)
+        self.relu3 = nn.ReLU()
         self.drop3 = nn.Dropout()
         self.fc2 = nn.Linear(256, 64)
+        self.relu4 = nn.ReLU()
         self.drop4 = nn.Dropout()
         self.fc3 = nn.Linear(64, 10)
         self.softmax = nn.Softmax(dim=1)
@@ -47,8 +49,8 @@ class DigitRecognizerNN(nn.Module):
         x = self.pool2(x)
 
         x = x.view(x.size(0), -1)
-        x = self.drop3(self.fc1(x))
-        x = self.drop4(self.fc2(x))
+        x = self.drop3(self.relu3(self.fc1(x)))
+        x = self.drop4(self.relu4(self.fc2(x)))
         return self.softmax(self.fc3(x))
 
     def record_state(self, loss):
