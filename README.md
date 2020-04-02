@@ -1,6 +1,6 @@
 Kaggle Competitions
 ====
-This repository will present my solutions to various Kaggle competitions using PyTorch framework. Detailed explanations will be availble at [xu932.github.io](https://xu932.github.io)
+This repository will present my solutions to various Kaggle competitions using PyTorch framework. Detailed explanations will be availble at [xu932.github.io](https://xu932.github.io/blog/kaggle/)
 
 Organization
 ----
